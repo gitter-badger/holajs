@@ -10,3 +10,8 @@ exports.index = function(req, res){
 exports.jeditable = function(req, res){
   res.render('jeditable', { title: 'Hola-Java Script' });
 };
+
+exports.save = function(req, res) {
+    // res.writeHead(200, {"Content-Type": "application/json"});
+    res.send('ok');
+};
