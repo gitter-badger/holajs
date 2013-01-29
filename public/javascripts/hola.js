@@ -46,7 +46,7 @@ var check_status = function(i)
 }
 
 
-var run = function(el) {
+var run = function() {
 	// Main
 	reset();
 	
@@ -75,3 +75,20 @@ var update_totals = function(msg) {
 		$("#start").removeAttr("disabled");
 	}
 }
+
+ $(document).ready(function() {
+     $('.edit').editable('/jeditable/save', {
+         indicator : 'Saving...',
+         tooltip   : 'Click to edit...'
+     });
+     $('.edit_area').editable('/jeditable/save', { 
+         type      : 'textarea',
+         cancel    : 'Cancel',
+         submit    : 'OK',
+         tooltip   : 'Click to edit...'
+     });
+ });
+
+$(document).ready(function() {
+	
+});
