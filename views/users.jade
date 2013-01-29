@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  div
+    a(href='/') Back
+
   div#run
       p Check status for users 1-30:
       button(onclick="run()")#start CHECK STATUS
@@ -24,3 +27,5 @@ block content
         span#users_unknown 0
       li Errors: 
         span#users_error  0
+
+  div(style='clear:both')

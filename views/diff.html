@@ -1,0 +1,10 @@
+<pre>
+@@ -374,6 +395,7 @@
+             
+             /* Privileged methods */
+             this.reset = function(form) {
++              if(!my_confirm()) return;
+                 /* Prevent calling reset twice when blurring. */
+                 if (this.editing) {
+                     /* Before reset hook, if it returns false abort reseting. */'
+</pre>

@@ -11,7 +11,7 @@ exports.onlinestatus = function(req, res)
 		res.send(404,'[NODE.JS]: User unknown'); // user 101
 	}
 
-	// emulate timeout for users 40,80
+	// emulate timeout for users 12,24
   	if(user_id % 12 == 0) 
   		return; 
 
