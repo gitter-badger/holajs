@@ -59,26 +59,6 @@
 
 (function($) {
 
-    var my_confirm = function() {
-      return confirm('Are you sure?');
-      // var retval = false;
-      // $("#dialog").dialog({
-      // autoOpen: false,
-      //   modal: false,
-      //   closeOnEscape: true,
-      //   buttons : {
-      //     "Confirm" : function() {
-      //         $(this).dialog("close");
-      //         retval = true;
-      //     },
-      //     "Cancel" : function() {
-      //       $(this).dialog("close");
-      //     }
-      //   }
-      // });
-      // $("#dialog").dialog("open");
-     }
-
     $.fn.editable = function(target, options) {
             
         if ('disable' == target) {
@@ -279,8 +259,7 @@
                 input.keydown(function(e) {
                     if (e.keyCode == 27) {
                         e.preventDefault();
-                          debugger
-                          reset.apply(form, [settings, self]);
+                        reset.apply(form, [settings, self]);
                     }
                 });
 
@@ -395,7 +374,6 @@
             
             /* Privileged methods */
             this.reset = function(form) {
-              if(!my_confirm()) return;
                 /* Prevent calling reset twice when blurring. */
                 if (this.editing) {
                     /* Before reset hook, if it returns false abort reseting. */
