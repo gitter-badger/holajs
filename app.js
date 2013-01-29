@@ -28,7 +28,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/user_:id', user.onlinestatus);
+app.get('/user_:id', user.online_status);
 app.get('/users', user.list);
 app.get('/jeditable', routes.jeditable)
 

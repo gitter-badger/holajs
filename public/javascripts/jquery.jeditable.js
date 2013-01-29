@@ -61,22 +61,6 @@
 
     var my_confirm = function() {
       return confirm('Are you sure?');
-      // var retval = false;
-      // $("#dialog").dialog({
-      // autoOpen: false,
-      //   modal: false,
-      //   closeOnEscape: true,
-      //   buttons : {
-      //     "Confirm" : function() {
-      //         $(this).dialog("close");
-      //         retval = true;
-      //     },
-      //     "Cancel" : function() {
-      //       $(this).dialog("close");
-      //     }
-      //   }
-      // });
-      // $("#dialog").dialog("open");
      }
 
     $.fn.editable = function(target, options) {
