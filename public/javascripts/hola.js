@@ -1,5 +1,5 @@
 var settings = {
-    total_users:31, // 101 used to emulate error on user_id = 101
+    total_users:31, // 31 used to emulate error on user_id = 101
     counter:0
 }
 
@@ -12,7 +12,6 @@ var check_status = function (i) {
         async:true, // default is true
         dataFilter:function (msg, type) {
             // Validate status returned from the server
-            debugger
             switch (msg) {
                 case 'online':
                 case 'offline':
@@ -86,8 +85,4 @@ $(document).ready(function () {
         submit:'OK',
         tooltip:'Click to edit...'
     });
-});
-
-$(document).ready(function () {
-
 });

@@ -263,7 +263,6 @@
                 input.keydown(function(e) {
                     if (e.keyCode == 27) {
                         e.preventDefault();
-                          debugger
                           reset.apply(form, [settings, self]);
                     }
                 });

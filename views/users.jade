@@ -1,32 +1,32 @@
 extends layout
 
 block content
-  div
-    a(href='/') Back
+    div
+        a(href='/') Back
 
-  div#run
-      p Check status for users 1-30:
-      button(onclick="run()")#start CHECK STATUS
-      div#results
+    div#run
+        p Check status for users 1-30:
+        button(onclick="run()")#start CHECK STATUS
+        div#results
+            ul
+    div#text
         ul
-  div#text
-    ul
-      li Server side: node.js, express, jade
-      li Check user status: /user_[user_id]:
-      li Example: 
-         a(href="/user_11") check status for user 11
-      li User 31 does not exist.
-      li The results are random ~50/50
-      li Requests for users 12,24 are timed out
-      li User 13 status is not detected
-    ul
-      li Users online:  
-        span#users_online  0
-      li Users offline: 
-        span#users_offline 0
-      li Users with unknown status:
-        span#users_unknown 0
-      li Errors: 
-        span#users_error  0
+            li Server side: node.js, express, jade
+            li Check user status: /user_[user_id]:
+            li Example:
+                a(href="/user_11") check status for user 11
+            li User 31 does not exist.
+            li The results are random ~50/50
+            li Requests for users 12,24 are timed out
+            li User 13 status is not detected
+        ul
+            li Users online:
+                span#users_online  0
+            li Users offline:
+                span#users_offline 0
+            li Users with unknown status:
+                span#users_unknown 0
+            li Errors:
+                span#users_error  0
 
-  div(style='clear:both')
+    div(style='clear:both')
