@@ -7,7 +7,7 @@ var check_status = function (i) {
         url:'/user_' + i,
         context:$('#results'),
         async:true, // default is true
-        dataFilter:function (msg, type) {
+        dataFilter:function (msg) {
             // Validate status returned from the server
             switch (msg) {
                 case 'online':
@@ -21,24 +21,24 @@ var check_status = function (i) {
     })
         .success(function (msg) {
             // Handle success response [online,offline,unknown]
-            $("#results ul").append(
+            $("#results_ul").append(
                 '<li id="u' + i + '">User ' + i +
                     ' status is: ' + msg + '</li>'
             );
             $("#u" + i).addClass(msg);
             update_totals(msg);
         })
-        .fail(function (err, text) {
+        .fail(function (err) {
             // Error handler
             // debugger
-            $("#results ul").append('<li id="u' + i + '">User ' + i + ' status is: [error]: ' + err.statusText + '</li>');
+            $("#results_ul").append('<li id="u' + i + '">User ' + i + ' status is: [error]: ' + err.statusText + '</li>');
             $("#users_error").addClass('offline');
 
             // Expected 3 errors:
             // 	user 101 not found and 2 timeouts
             update_totals('error');
         });
-}
+};
 
 
 var run = function () {
@@ -49,18 +49,18 @@ var run = function () {
         check_status(i, results);
     }
 
-}
+};
 
 
 var reset = function () {
     // Clear old results
-    $("#results ul li").remove();
+    $("#results_ul").empty();
     $("li span").html(0);
 
     $.settings = {
         total_users:31, // 31 used to emulate error on user_id = 101
         counter:0
-    }
+    };
 
     $.results = {
         error:0,
@@ -68,7 +68,7 @@ var reset = function () {
         offline:0,
         unknown:0
     }
-}
+};
 
 var update_totals = function (msg) {
     var el = $("#users_" + msg);
@@ -81,7 +81,7 @@ var update_totals = function (msg) {
         $("#start").removeAttr("disabled");
         submit_results($.results);
     }
-}
+};
 
 var submit_results = function (results) {
     $.ajax({
@@ -95,17 +95,15 @@ var submit_results = function (results) {
         }
     })
         .success(function (res) {
-            $("#submit_results").html(res);
-            $("#submit_results").addClass('online');
+            $("#submit_results").addClass('online').html(res);
         })
-        .fail(function (err, text) {
+        .fail(function (err) {
             // console.log(err);
-            $("#submit_results").html(err.statusText);
-            $("#submit_results").addClass('offline');
+            $("#submit_results").addClass('offline').html(err.statusText);
 
         })
 
-}
+};
 
 /* End sequential operations */
 
