@@ -1,5 +1,5 @@
 {
-    "name":"application-name",
+    "name":"Hola-js",
     "version":"0.0.1",
     "private":true,
     "scripts":{
@@ -9,12 +9,10 @@
         "express":"3.1.0",
         "jade":"*"
     },
+    "engineStrict": "true",
     "engines":{
-        "node":"0.8.x",
+        "node":"0.8.18",
         "npm":"1.1.4"
     },
-    "author":{
-        "name":"Slava Shklyar",
-        "email":"slava.shklyar@gmail.com"
-    }
+    "author": "Slava Shklyar <slava.shklyar@gmail.com>"
 }
