@@ -13,5 +13,5 @@ exports.jeditable = function(req, res){
 
 exports.save = function(req, res) {
     // res.writeHead(200, {"Content-Type": "application/json"});
-    res.send('ok');
+    res.send(req.param('value'));
 };
