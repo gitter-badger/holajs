@@ -1,12 +1,19 @@
 /* Sequential operations */
 
 var check_status = function (i) {
-    $("#start").attr("disabled", "disabled");
+
+    var btn = $('#start');
+    if(i > $.settings.total_users) {
+        btn.removeAttr("disabled");
+        submit_results($.results);
+        return;
+    }
+
+    btn.attr("disabled", "disabled");
 
     $.ajax({
         url:'/user_' + i,
         context:$('#results'),
-        async:true, // default is true
         dataFilter:function (msg) {
             // Validate status returned from the server
             switch (msg) {
@@ -37,6 +44,9 @@ var check_status = function (i) {
             // Expected 3 errors:
             // 	user 101 not found and 2 timeouts
             update_totals('error');
+        })
+        .complete(function() {
+            check_status(++i);
         });
 };
 
@@ -45,9 +55,7 @@ var run = function () {
     // Main
     reset();
 
-    for (i = 1; i <= $.settings.total_users; i++) {
-        check_status(i, results);
-    }
+    check_status(1);
 
 };
 
@@ -56,6 +64,7 @@ var reset = function () {
     // Clear old results
     $("#results_ul").empty();
     $("li span").html(0);
+    $('#submit_results').html('');
 
     $.settings = {
         total_users:31, // 31 used to emulate error on user_id = 101
@@ -76,11 +85,6 @@ var update_totals = function (msg) {
 
     $.settings.counter++;
     $.results[msg]++;
-
-    if($.settings.counter == $.settings.total_users) {
-        $("#start").removeAttr("disabled");
-        submit_results($.results);
-    }
 };
 
 var submit_results = function (results) {
