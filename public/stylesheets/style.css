@@ -50,3 +50,11 @@ span {
 div {
 	margin: 5px;
 }
+
+#submit_results {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}

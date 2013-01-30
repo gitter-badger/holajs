@@ -1,7 +1,4 @@
-var settings = {
-    total_users:31, // 31 used to emulate error on user_id = 101
-    counter:0
-}
+/* Sequential operations */
 
 var check_status = function (i) {
     $("#start").attr("disabled", "disabled");
@@ -20,7 +17,7 @@ var check_status = function (i) {
                     return 'unknown';
             }
         },
-        timeout:3000
+        timeout:2000
     })
         .success(function (msg) {
             // Handle success response [online,offline,unknown]
@@ -48,7 +45,7 @@ var run = function () {
     // Main
     reset();
 
-    for (i = 1; i <= settings.total_users; i++) {
+    for (i = 1; i <= $.settings.total_users; i++) {
         check_status(i, results);
     }
 
@@ -60,20 +57,60 @@ var reset = function () {
     $("#results ul li").remove();
     $("li span").html(0);
 
-    settings.counter = 0;
-}
+    $.settings = {
+        total_users:31, // 31 used to emulate error on user_id = 101
+        counter:0
+    }
 
+    $.results = {
+        error:0,
+        online:0,
+        offline:0,
+        unknown:0
+    }
+}
 
 var update_totals = function (msg) {
     var el = $("#users_" + msg);
     el.html(parseInt(el.html()) + 1);
-    settings.counter++;
 
-    if (settings.counter == settings.total_users) {
+    $.settings.counter++;
+    $.results[msg]++;
+
+    if($.settings.counter == $.settings.total_users) {
         $("#start").removeAttr("disabled");
+        submit_results($.results);
     }
 }
 
+var submit_results = function (results) {
+    $.ajax({
+        url:'/users/results',
+        type:'POST',
+        async:false,
+        timeout:3000,
+        data:$.results,
+        dataFilter:function (res) {
+            return JSON.stringify(res);
+        }
+    })
+        .success(function (res) {
+            $("#submit_results").html(res);
+            $("#submit_results").addClass('online');
+        })
+        .fail(function (err, text) {
+            // console.log(err);
+            $("#submit_results").html(err.statusText);
+            $("#submit_results").addClass('offline');
+
+        })
+
+}
+
+/* End sequential operations */
+
+
+/* Jeditable */
 $(document).ready(function () {
     $('.edit').editable('/jeditable/save', {
         indicator:'Saving...',
