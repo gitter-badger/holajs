@@ -20,7 +20,7 @@ exports.jeditable = function(req, res){
 
 exports.save = function(req, res) {
     // res.writeHead(200, {"Content-Type": "application/json"});
-    res.send(req.param('value'));
+    return_body(req.param('value'), res);
 };
 
 exports.select_json = function(req, res) {
