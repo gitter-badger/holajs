@@ -58,3 +58,11 @@ div {
     white-space: -o-pre-wrap;
     word-wrap: break-word;
 }
+
+#modal_confirm {
+    font-size: 16px !important;
+    font-weight: normal;
+}
+.ui-button-text, .ui-dialog-title {
+    font-size: 16px;
+}

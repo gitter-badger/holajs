@@ -42,7 +42,7 @@ var check_status = function (i) {
             $("#users_error").addClass('offline');
 
             // Expected 3 errors:
-            // 	user 101 not found and 2 timeouts
+            // 	user 31 not found and 2 timeouts
             update_totals('error');
         })
         .complete(function() {
@@ -67,7 +67,7 @@ var reset = function () {
     $('#submit_results').html('');
 
     $.settings = {
-        total_users:31, // 31 used to emulate error on user_id = 101
+        total_users:31, // 31 used to emulate error on user_id = 31
         counter:0
     };
 
@@ -110,18 +110,3 @@ var submit_results = function (results) {
 };
 
 /* End sequential operations */
-
-
-/* Jeditable */
-$(document).ready(function () {
-    $('.edit').editable('/jeditable/save', {
-        indicator:'Saving...',
-        tooltip:'Click to edit...'
-    });
-    $('.edit_area').editable('/jeditable/save', {
-        type:'textarea',
-        cancel:'Cancel',
-        submit:'OK',
-        tooltip:'Click to edit...'
-    });
-});

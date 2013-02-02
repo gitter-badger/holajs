@@ -59,10 +59,6 @@
 
 (function($) {
 
-    var my_confirm = function() {
-      return confirm('Are you sure?');
-     }
-
     $.fn.editable = function(target, options) {
             
         if ('disable' == target) {
@@ -378,11 +374,10 @@
             
             /* Privileged methods */
             this.reset = function(form) {
-              if(!my_confirm()) return;
                 /* Prevent calling reset twice when blurring. */
                 if (this.editing) {
                     /* Before reset hook, if it returns false abort reseting. */
-                    if (false !== onreset.apply(form, [settings, self])) { 
+                    if (false !== onreset.apply(form, [settings, self])) {
                         $(self).html(self.revert);
                         self.editing   = false;
                         if (!$.trim($(self).html())) {
@@ -394,9 +389,58 @@
                         }
                     }                    
                 }
-            };            
-        });
+            };
 
+            this.orig_reset = this.reset;
+
+            this.reset = function(form) {
+                // debugger
+                if(this.revert == form[0][0].value) {
+                    console.log('Content is not changed - reset');
+                    this.orig_reset(form);
+                } else {
+                    console.log('Content is changed');
+                    var _this = this;
+                    var _element = $("#modal_confirm");
+
+                    //noinspection JSCheckFunctionSignatures
+                    _element.dialog({
+                        autoOpen: false,
+                        minHeight: 180,
+                        width: 450,
+                        modal: true,
+                        closeOnEscape: true,
+                        draggable: false,
+                        resizable: false,
+                        buttons: {
+                            'Discard changes': function(){
+                                $(this).dialog('close');
+                                dialog_callback(true);
+                            },
+                            'Continue editing': function(){
+                                $(this).dialog('close');
+                                dialog_callback(false);
+                            }
+                        }
+                    })
+                        .html("Are you sure you want to cancel your changes?")
+                        .dialog("open")
+                        .bind('clickoutside', function (e) {
+                            _element.dialog('close');
+                    });
+                    function dialog_callback(discard){
+                        console.log('Dialog callback: ' + discard);
+                        if (discard) {
+                            // debugger
+                            _this.orig_reset(form);
+                        } else {
+                            // Save editable element in focus
+                            form[0][0].focus();
+                        }
+                    }
+                }
+            }
+        });
     };
 
 

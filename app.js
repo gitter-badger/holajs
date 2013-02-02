@@ -32,6 +32,8 @@ app.get('/user_:id', user.online_status);
 app.get('/users', user.list);
 app.get('/jeditable', routes.jeditable);
 app.post('/jeditable/save', routes.save);
+app.get('/jeditable/select_json', routes.select_json);
+app.get('/jeditable/load', routes.load);
 app.post('/users/results', user.results);
 
 http.createServer(app).listen(app.get('port'), function () {
