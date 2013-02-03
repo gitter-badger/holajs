@@ -424,8 +424,8 @@
                         }
                     })
                         .html("Are you sure you want to cancel your changes?")
-                        .dialog("open")
-                        .bind('clickoutside', function (e) {
+                        .dialog("open");
+                        _element.parent().bind('clickoutside', function (e) {
                             _element.dialog('close');
                     });
                     function dialog_callback(discard){
