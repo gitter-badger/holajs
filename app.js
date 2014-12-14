@@ -8,6 +8,7 @@ var express = require('express')
     , http = require('http')
     , path = require('path');
 
+
 var app = express();
 
 //noinspection JSValidateTypes
@@ -26,6 +27,8 @@ app.configure(function () {
 app.configure('development', function () {
     app.use(express.errorHandler());
 });
+
+
 
 app.get('/', routes.index);
 app.get('/user_:id', user.online_status);
