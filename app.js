@@ -28,6 +28,8 @@ app.configure('development', function () {
     app.use(express.errorHandler());
 });
 
+
+
 app.get('/', routes.index);
 app.get('/user_:id', user.online_status);
 app.get('/users', user.list);
